@@ -1,0 +1,6 @@
+virtualdirs:
+  mergeddir1:
+    - "/home/user1/dir1"
+    - "/home/user1/dir2"
+  mergeddir2:
+    - "/var/www"
