@@ -206,7 +206,8 @@ func (fdfi *FakeDirFileInfo) Sys() interface{} {
 
 var BufferPool = sync.Pool{
 	New: func() interface{} {
-		return make([]byte, 8*1024)
+		//NOTE: benchmarks show this much faster at 8k, but once sending to network socket thats not the case since network is then the bottleneck
+		return make([]byte, 128*1024)
 	},
 }
 

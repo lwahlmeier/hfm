@@ -30,7 +30,6 @@ func Test_dirList(t *testing.T) {
 	req, _ := http.NewRequest("GET", "http://localhost", nil)
 	f, _ := os.Open("/proc")
 	dirList(frw, req, f)
-	// fmt.Println(string(frw.body))
 }
 
 func BenchmarkDirList(b *testing.B) {
