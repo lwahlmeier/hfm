@@ -11,6 +11,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -100,7 +101,7 @@ func dirList(w http.ResponseWriter, r *http.Request, f File) {
 		http.Error(w, "Error reading directory", http.StatusInternalServerError)
 		return
 	}
-	// sort.Slice(dirs, func(i, j int) bool { return dirs[i].Name() < dirs[j].Name() })
+	sort.Slice(dirs, func(i, j int) bool { return dirs[i].Name() < dirs[j].Name() })
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	sb := strings.Builder{}
@@ -117,19 +118,19 @@ func dirList(w http.ResponseWriter, r *http.Request, f File) {
 		url := url.URL{Path: name}
 		sname := htmlReplacer.Replace(name)
 		rname := []rune(sname)
-		if len(rname) > 40 {
-			rname = rname[:40]
+		if len(rname) > 70 {
+			rname = rname[:67]
 			sname = string(rname) + "..."
 		}
+		sname += "</a>"
 		sb.WriteString("<a href=\"")
 		sb.WriteString(url.String())
 		sb.WriteString("\">")
-		sb.WriteString(sname)
-		sb.WriteString("</a> ")
+		sb.WriteString(fmt.Sprintf("%-74s", sname))
 
 		sb.WriteString(d.ModTime().UTC().Format("02-Jan-2006 15:04:05 GMT"))
 		sb.WriteString(" ")
-		sb.WriteString(strconv.FormatInt(d.Size(), 10))
+		sb.WriteString(fmt.Sprintf("%20d", d.Size()))
 		sb.WriteString("\n")
 	}
 	sb.WriteString("</pre>\n")
