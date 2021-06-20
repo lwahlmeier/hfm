@@ -1,7 +1,4 @@
-# github.com/PremiereGlobal/stim v0.3.2
-## explicit
-github.com/PremiereGlobal/stim/pkg/stimlog
-# github.com/cornelk/hashmap v1.0.0
+# github.com/cornelk/hashmap v1.0.1
 github.com/cornelk/hashmap
 # github.com/dchest/siphash v1.1.0
 github.com/dchest/siphash
@@ -20,6 +17,11 @@ github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
 # github.com/inconshreveable/mousetrap v1.0.0
 github.com/inconshreveable/mousetrap
+# github.com/lwahlmeier/lcwlog v0.0.1
+## explicit
+github.com/lwahlmeier/lcwlog
+# github.com/lwahlmeier/pyfmt v0.0.1
+github.com/lwahlmeier/pyfmt
 # github.com/magiconair/properties v1.8.1
 github.com/magiconair/properties
 # github.com/mitchellh/mapstructure v1.1.2
@@ -41,6 +43,8 @@ github.com/spf13/pflag
 # github.com/spf13/viper v1.7.1
 ## explicit
 github.com/spf13/viper
+# github.com/stretchr/testify v1.4.0
+## explicit
 # github.com/subosito/gotenv v1.2.0
 github.com/subosito/gotenv
 # github.com/tevino/abool v1.2.0
@@ -56,6 +60,8 @@ golang.org/x/sys/unix
 ## explicit
 golang.org/x/text/transform
 golang.org/x/text/unicode/norm
+# gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15
+## explicit
 # gopkg.in/ini.v1 v1.51.0
 gopkg.in/ini.v1
 # gopkg.in/yaml.v2 v2.4.0

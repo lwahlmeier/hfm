@@ -10,14 +10,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/PremiereGlobal/stim/pkg/stimlog"
+	"github.com/lwahlmeier/lcwlog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/mod/semver"
 	"gopkg.in/yaml.v2"
 )
 
-var log = stimlog.GetLogger()
+var log = lcwlog.GetLogger()
 var version string
 var config = viper.New()
 var startTime = time.Now().Local()
@@ -30,7 +30,7 @@ func init() {
 		version = lv
 	}
 	if !semver.IsValid(version) {
-		stimlog.GetLogger().Fatal("Bad Version:{}", version)
+		lcwlog.GetLogger().Fatal("Bad Version:{}", version)
 	}
 }
 
