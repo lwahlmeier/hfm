@@ -20,7 +20,7 @@ import (
 var log = lcwlog.GetLogger()
 var version string
 var config = viper.New()
-var startTime = time.Now().Local()
+var startTime = time.Now()
 
 func init() {
 
@@ -81,7 +81,7 @@ func parseInfo(cmd *cobra.Command, args []string) {
 	checkError(err)
 	vds := &VirtualDirs{}
 	yaml.Unmarshal(cba, vds)
-	log.Info("{} {} {}", port, vds)
+	log.Info("{} {}", port, vds)
 	for k, v := range vds.VirtualDirs {
 		log.Info("{}:{}", k, v)
 	}
@@ -105,6 +105,7 @@ func parseInfo(cmd *cobra.Command, args []string) {
 	}
 	err = srv.ListenAndServe()
 	checkError(err)
+
 }
 
 func checkError(e error) {
