@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -39,6 +40,7 @@ func NewMergedFileSystem(dirMap map[string][]string) *MergedFileSystem {
 		}
 		lfd = append(lfd, fdfi)
 	}
+	sort.Slice(lfd, func(i, j int) bool { return lfd[i].Name() < lfd[j].Name() })
 
 	fd := &FakeDir{
 		name: "",
@@ -102,6 +104,7 @@ func (mf *MergedFile) Readdir(count int) ([]os.FileInfo, error) {
 	if len(mf.pathFile) > 1 {
 		var lastErr error
 		fim := make(map[string]os.FileInfo)
+		fil := make([]os.FileInfo, 0)
 		for _, fp := range mf.pathFile {
 			tfil, err := fp.Readdir(count)
 			fp.Close()
@@ -110,8 +113,12 @@ func (mf *MergedFile) Readdir(count int) ([]os.FileInfo, error) {
 				continue
 			}
 			for _, fi := range tfil {
+				if mf.hideHidden && fi.Name()[0] == '.' {
+					continue
+				}
 				if _, ok := fim[fi.Name()]; !ok {
 					fim[fi.Name()] = fi
+					fil = append(fil, fi)
 				}
 				if count > 0 && len(fim) >= count {
 					break
@@ -120,13 +127,6 @@ func (mf *MergedFile) Readdir(count int) ([]os.FileInfo, error) {
 		}
 		if len(fim) == 0 {
 			return nil, lastErr
-		}
-		fil := make([]os.FileInfo, 0)
-		for _, v := range fim {
-			if mf.hideHidden && v.Name()[0] == '.' {
-				continue
-			}
-			fil = append(fil, v)
 		}
 		return fil, nil
 	}
