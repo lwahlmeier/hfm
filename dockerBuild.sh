@@ -21,7 +21,7 @@ echo "---------------------"
 echo "Building httpFileMerge    "
 echo "---------------------"
 
-docker run --rm -e VERSION=${VERSION} -e GO111MODULE=on -e HOME=/tmp -u $(id -u ${USER}):$(id -g ${USER}) -v "$PWD":/go/build -w /go/build golang:1.16 \
+docker run --rm -e VERSION=${VERSION} -e GO111MODULE=on -e HOME=/tmp -u $(id -u ${USER}):$(id -g ${USER}) -v "$PWD":/go/build -w /go/build golang:1.22 \
 ./build.sh
 
 echo ""
